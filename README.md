@@ -55,43 +55,10 @@ Fastq and CuffDiff output files are available at the National Center for Biotech
  This command will create two outputs: an .html file & an .zip file. Will output sampleID_fastqc.html and sampleID_fastqc.zip files
 
 ### 3. Trim raw fastq files for quality and to remove adaptors 
-Trimmomatic performs a variety of useful trimming tasks for illumina paired-end and single ended data.The selection of trimming steps and their associated parameters are supplied on the command line.
-
-
- The current trimming steps are:
- ILLUMINACLIP: Cut adapter and other illumina-specific sequences from the read.
- SLIDINGWINDOW: Perform a sliding window trimming, cutting once the average quality within the window falls below a threshold.
- LEADING: Cut bases off the start of a read, if below a threshold quality
- TRAILING: Cut bases off the end of a read, if below a threshold quality
- CROP: Cut the read to a specified length
- HEADCROP: Cut the specified number of bases from the start of the read
- MINLEN: Drop the read if it is below a specified length
- TOPHRED33: Convert quality scores to Phred-33
- TOPHRED64: Convert quality scores to Phred-64
- It works with FASTQ (using phred + 33 or phred + 64 quality scores, depending on the Illumina pipeline used), either uncompressed or gzipp'ed FASTQ. Use of gzip format is determined based on the .gz extension.
- 
- The parameters selected were slidingwindow:4:30 leading10 trailing25 minlen50 phred33. They were chosen based on a better per sequence quality base and kmer content.
- A few fastq files were tested to determine the use of phred33 or phred 64. Phred33 was chosen due to the amount of bases ramining after trimming.
- Other parameters tested but not found to be ideal are sliding4:30 leading30 trailing40, sliding4:40 leading10 trailing25, sliding 4:40 leading30 trailing 40
- 
- $java -jar /path/to/trimmomatic-0.36.jar SE -phred33 input.fq.gz output.fq.gz ILLUMINACLIP:/adapters/TruSeq3-SE.fa:2:30:10 LEADING:10 TRAILING:25 SLIDINGWINDOW:4:30 MINLEN:50
- Example Command: java -jar /home/sbrotman/GETx_Brain/00_tools/Trimmomatic-0.36/trimmomatic-0.36.jar SE -phred33 /mnt/storage/public/dbgap-8834/femalebrain/SRR598768_1.fastq /home/sbrotman/GETx_Brain/02_raw/trim_female/SRR598768_1_trim_1.fastq ILLUMINACLIP:/home/sbrotman/GETx_Brain/00_tools/Trimmomatic-0.36/adapters/TruSeq3-SE.fa:2:30:10 LEADING:10 TRAILING:25 SLIDINGWINDOW:4:30 MINLEN:50
- java                                                          indicates that this is a java program and will require java in order to run
- -jar                                                          jar file to follow
- trimmomatic-0.36.jar                                          tool that will trim the raw fastq files
- SE                                                            SE is for singel end reads. If pair end then PE
- -phred33                                                      Using phred + 33 or phred + 64 quality scores, depending on the Illumina pipeline used, either uncompressed or gzipp'ed FASTQ 
- input.fq.gz                                                   sampeID in fastq format
- output.fq.gz                                                  sampleID output file. Use a descriptive name such as sampleID_minlen50_sliding430_leading30_trailing40.fq
- ILLUMINACLIP:TruSeq3-SE:2:30:10                               Remove Illumina adapters provided in the TruSeq3-PE.fa file (provided). Initially Trimmomatic will look for seed matches (16 bases) allowing maximally 2 mismatches. These seeds will be extended and clipped if in the case of paired end reads a score of 30 is reached (about 50 bases), or in the case of single ended reads a score of 10, (about 17 bases).
- LEADING:10                                                    Cut bases off the start of a read, if below a threshold quality of 10
- TRAILING:25                                                   Cut bases off the end of a read, if below a threshold quality of 25
- SLIDINGWINDOW:4:30                                            Scan the read with a 4-base wide sliding window, cutting when the average quality per base drops below 30
- MINLEN:50                                                     Drop the read if it is below a specified length of 50
- adapters														add pathway to adapters directory
-
- SBATCH script - 
-sbatch NameOfSBATCHscript.sh 
+The selection of trimming steps and their associated parameters are supplied on the command line.
+The parameters selected were slidingwindow:4:30 leading10 trailing25 minlen50 phred33. They were chosen based on a better per sequence quality base and kmer content.
+		
+	Example command: $java -jar trimmomatic-0.36.jar SE -phred33 input.fq.gz output.fq.gz ILLUMINACLIP:/adapters/TruSeq3-SE.fa:2:30:10 LEADING:10 TRAILING:25 SLIDINGWINDOW:4:30 MINLEN:50
 
 --------------------------------------
  5. Create and view fastqc reports for the trimmed fastq files
