@@ -10,6 +10,7 @@ Fastq and CuffDiff output files are available at the National Center for Biotech
 RNA-seq reads were quality-checked using FastQC before and after trimming and filtering. Reads shorter than 50 bases, and base reads below the PHRED-scaled threshold quality of 10 at the 5’ end or 25 at the trailing 3’ end as well as below the average quality of 30 (within a sliding window of 4 bases) were filtered or clipped using TrimmomaticSE (33). A combined reference genome index and dictionary for GRCH38.p7 (1-22, X, MT, and non-chromosomal sequences) plus the full coding region of PcTF was generated using Spliced Transcripts Alignment to Reference (STARv2.5.2b)and the picard tools (version 1.1.19). Trimmed RNA-seq reads were mapped, and splice junctions extracted, using STARv2.5.2b read aligner. Bamtools2.4.0 was used to determine alignment quality (‘stats’ command), sort reads, mark duplicates, add read groups, and to index the BAM read files. CuffDiff (Cufflinks package), was used to run pairwise comparisons to identify significant (q ≤ 0.05) differential expression. CummeRbund was used to calculate distances between features (JSD plots). R ggplot2 and VennDiagrams were used to generate heat maps and Venn diagrams respectively
 
 ### Contents:
+#### RNAseq processing for differential expression analysis 
 1. Download or obtain data 
 2. FastQC to check the quality of the raw reads
 3. Trim fastq files for quality and to remove adaptors. 
@@ -19,14 +20,16 @@ RNA-seq reads were quality-checked using FastQC before and after trimming and fi
 7. STAR: map transcript reads to the reference genome and identify splice junctions 
 8. check quality of raw BAM files
 9. Sort BAM files, to be in the same order as the reference for downstream analysis 
-10. check quality of sorted BAM files
-11. Mark duplicates, duplicates will not be removed but will be marked for quality checks
-12. check quality of mark duplicates BAM files
-13. Add read groups to BAM files, this done to keep the sample ids organized when creating the merged vcf file
-14. check quality of add read group BAM files
-15. Index BAM files
-16. Identify genes that differentially expressed 
-
+10. Mark duplicates, duplicates will not be removed but will be marked for quality checks
+11. Add read groups to BAM files, this done to keep the sample ids organized when creating the merged vcf file
+12. check quality of add read group BAM files
+13. Index BAM files
+14. Identify genes that differentially expressed 
+#### Differential expression figures   
+Figure 1
+Figure 2
+Figure 3
+Figure 4
 
 ### Publicly available packages:
 fastqc		http://www.bioinformatics.babraham.ac.uk/projects/fastqc/
