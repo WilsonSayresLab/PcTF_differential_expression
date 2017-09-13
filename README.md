@@ -1,14 +1,13 @@
 # PcTF differential expression
 Code for analyzing RNAseq data from breast cell lines expressing PcTF, and code for making figures. 
 
-#### Citation and data download 
+### Citation and data download:
 Olney, K. C., Nyer, D. B., Wilson Sayres, M. A. & Haynes, K. Activation of tumor suppressor genes in breast cancer cells by a synthetic chromatin effector. (2017). bioRxiv 186056; doi: https://doi.org/10.1101/186056 
 
 Fastq and CuffDiff output files are available at the National Center for Biotechnology Information (NCBI) Gene Expression Omnibus (GEO) database (accession GSE103520)
 
 ### Methods:
-RNA-seq reads were quality-checked using FastQC before and after trimming and filtering. Reads shorter than 50 bases, and base reads below the PHRED-scaled threshold quality of 10 at the 5’ end or 25 at the trailing 3’ end as well as below the average quality of 30 (within a sliding window of 4 bases) were filtered or clipped using TrimmomaticSE (33). A combined reference genome index and dictionary for GRCH38.p7 (1-22, X, MT, and non-chromosomal sequences) (34) plus the full coding region of PcTF was generated using Spliced Transcripts Alignment to Reference (STARv2.5.2b) (35) and the picard tools (version 1.1.19) (36). Trimmed RNA-seq reads were mapped, and splice junctions extracted, using STARv2.5.2b read aligner (35). Bamtools2.4.0 (37) was used to determine alignment quality (‘stats’ command), sort reads, mark duplicates, add read groups, and to index the BAM read files. CuffDiff (Cufflinks package (38)), was used to run pairwise comparisons to identify significant (q ≤ 0.05) differential expression. Fastq and CuffDiff output files are available at the National Center for Biotechnology Information (NCBI) Gene Expression Omnibus (GEO) database (accession GSE103520). CummeRbund (38) was used to calculate distances between features (JSD plots). R ggplot2 (39) and VennDiagrams (40) were used to generate heat maps and Venn diagrams respectively
-
+RNA-seq reads were quality-checked using FastQC before and after trimming and filtering. Reads shorter than 50 bases, and base reads below the PHRED-scaled threshold quality of 10 at the 5’ end or 25 at the trailing 3’ end as well as below the average quality of 30 (within a sliding window of 4 bases) were filtered or clipped using TrimmomaticSE (33). A combined reference genome index and dictionary for GRCH38.p7 (1-22, X, MT, and non-chromosomal sequences) plus the full coding region of PcTF was generated using Spliced Transcripts Alignment to Reference (STARv2.5.2b)and the picard tools (version 1.1.19). Trimmed RNA-seq reads were mapped, and splice junctions extracted, using STARv2.5.2b read aligner. Bamtools2.4.0 was used to determine alignment quality (‘stats’ command), sort reads, mark duplicates, add read groups, and to index the BAM read files. CuffDiff (Cufflinks package), was used to run pairwise comparisons to identify significant (q ≤ 0.05) differential expression. CummeRbund was used to calculate distances between features (JSD plots). R ggplot2 and VennDiagrams were used to generate heat maps and Venn diagrams respectively
 
 ### Contents:
 1. Download or obtain data 
@@ -35,23 +34,23 @@ RNA-seq reads were quality-checked using FastQC before and after trimming and fi
       Trimmomatic       http://www.usadellab.org/cms/?page=trimmomatic
       STAR		https://github.com/alexdobin/STAR
       bamtools          https://github.com/pezmaster31/bamtools
-      cuffdiff          http://cole-trapnell-lab.github.io/cufflinks/cuffdiff/     
+      cuffdiff          http://cole-trapnell-lab.github.io/cufflinks/cuffdiff/  
+      cummeRbund	http://compbio.mit.edu/cummeRbund/manual_2_0.html 
+      ggplot2		http://ggplot2.tidyverse.org/reference/ 
+      VennDiagram	https://cran.r-project.org/web/packages/VennDiagram/VennDiagram.pdf  
 --------------------------------------
 RNAseq processing for differential expression analysis 
 --------------------------------------
 ### 1. Download data
 GEO accession number
-
-			$wget ftp://GEO/path
+Fastq and CuffDiff output files are available at the National Center for Biotechnology Information (NCBI) Gene Expression Omnibus (GEO) database (accession GSE103520)
 
 ### 2. Create and view fastqc reports
  Fastqc reads raw sequence data from high throughput sequencers and runs a set of quality checks to produce a report. 
  Best reports are those whose "per base sequence quality" are included in the green area of the graph & kmer content is good or average.
 
  	Example command: $fastqc sampleID.fastq
-	 fastqc                                                        Babraham bioinformatics program that that checks for quality of reads 
- 	sampleID.fastq                                                path and name of sampleID in fastq format, may also be in fastq.gz format
-
+	
  Reports were saved in fastq_files directory in Project /Project/fastq_files
  This command will create two outputs: an .html file & an .zip file. Will output sampleID_fastqc.html and sampleID_fastqc.zip files
 
