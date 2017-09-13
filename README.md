@@ -129,7 +129,7 @@ For each sample, add a read group to the mark duplicate BAM files (a read group 
  
 	Example command: $java -Xmx8g -jar picard.jar AddOrReplaceReadGroups INPUT=sampleID.sorted.rmdup.bam OUTPUT=sampleID.sorted.rmdup.addReadGr.bam RGLB=sampleID RGPL=machineUsed RGPU=laneUsed RGSM=sampleName RGCN=location RGDS=species VALIDATION_STRINGENCY=LENIENT
 
-#### 12. Generate statistics on final BAM sample files
+#### 12. Generate statistics on BAM sample files
 For each sample get the read stats for the remove duplicates and add read groups BAM files.
 Statistics on the BAM files should be the same as before the previous step when read groups were modified.
 Compare stat results for each sample to the markdup.bam file (sanity check: is there the same number of reads as the original BAM file?) Compare stat results for each sample to the original bam file (sanity check: is there the same number of reads as the original BAM file?)If there is more than 15% of the reads being marked as duplicates may need to consider removing that sample
@@ -137,6 +137,9 @@ Compare stat results for each sample to the markdup.bam file (sanity check: is t
  	Example command: bamtools stats -in sampleID.sorted.markdup.addReadGr.bam
 
 #### 13. Merge lanes into one BAM file
+Merge the multiple lane files into 1 bam file for each sample. 
+
+	Example command: $bamtools merge -in KH1_S1_L001.sort.markdup.readgrps.bam -in KH1_S1_L002.sort.markdup.readgrps.bam -in KH1_S1_L003.sort.markdup.readgrps.bam -in KH1_S1_L004.sort.markdup.readgrps.bam -out KH1_S1.sort.markdup.readgrps.merge.bam
 
 #### 14. Index BAM files
 For each sample index the processed BAM files that are sorted, have marked duplicates, and have read groups added. These will be used to identify callable loci. 
@@ -146,6 +149,10 @@ Output will be sampleID.sorted.markdup.addReadGr.bam.bai
  	Example command: $bamtools index -in sampleID.sorted.markdup.addReadGr.bam
 
 #### 15. Check quality of merged BAM files 
+For each sample get the read stats for the merged BAM files.
+ 
+ 	Example command: bamtools stats -in sampleID.sorted.markdup.addReadGr.merge.bam
+
 
 #### 16. Differential expression using Cuffdiff
 Identify differentially expressed genes and transcripts using cuffdiff. Cuffdiff is used to find significant changes in transcript expression, splicing, and promoter use. Cuffdiff uses a gene annotation file downloaded with a sbatch script from Gencode GRCh38
