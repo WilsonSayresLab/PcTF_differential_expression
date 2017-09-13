@@ -30,12 +30,19 @@ RNA-seq reads were quality-checked using FastQC before and after trimming and fi
 
 ### Publicly available packages:
 fastqc		http://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+
 Trimmomatic	http://www.usadellab.org/cms/?page=trimmomatic
+
 STAR		https://github.com/alexdobin/STAR
+
 bamtools	https://github.com/pezmaster31/bamtools
+
 cuffdiff	http://cole-trapnell-lab.github.io/cufflinks/cuffdiff/  
+
 cummeRbund	http://compbio.mit.edu/cummeRbund/manual_2_0.html 
+
 ggplot2		http://ggplot2.tidyverse.org/reference/ 
+
 VennDiagram	https://cran.r-project.org/web/packages/VennDiagram/VennDiagram.pdf  
 
 --------------------------------------
