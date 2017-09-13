@@ -1,0 +1,55 @@
+#!/bin/bash
+#SBATCH -n 8
+#SBATCH --job-name=BAMtools_merge
+#SBATCH -t 2-0:0
+#SBATCH -A mwilsons
+#SBATCH -o slurm.BAMtools_merge.out
+#SBATCH -e slurm.BAMtools_merge.err
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=kcolney@asu.edu
+#--------------------------
+
+#-------------------------- 
+# 1. start timer 
+#-------------------------- 
+date
+
+#-------------------------- 
+# 2. move to directory and load programs 
+#-------------------------- 
+
+cd /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/
+module load bamtools/2.4.0 
+
+#-------------------------- 
+# 3. BAMtools sort, mark duplicates 
+#--------------------------
+bamtools merge -in KH1_S1_L001.sort.markdup.readgrps.split.bam -in KH1_S1_L002.sort.markdup.readgrps.split.bam -in KH1_S1_L003.sort.markdup.readgrps.split.bam -in KH1_S1_L004.sort.markdup.readgrps.split.bam -out KH1_S1.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH2_S2_L001.sort.markdup.readgrps.split.bam -in KH2_S2_L002.sort.markdup.readgrps.split.bam -in KH2_S2_L003.sort.markdup.readgrps.split.bam -in KH2_S2_L004.sort.markdup.readgrps.split.bam -out KH2_S2.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH3_S3_L001.sort.markdup.readgrps.split.bam -in KH3_S3_L002.sort.markdup.readgrps.split.bam -in KH3_S3_L003.sort.markdup.readgrps.split.bam -in KH3_S3_L004.sort.markdup.readgrps.split.bam -out KH3_S3.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH4_S4_L001.sort.markdup.readgrps.split.bam -in KH4_S4_L002.sort.markdup.readgrps.split.bam -in KH4_S4_L003.sort.markdup.readgrps.split.bam -in KH4_S4_L004.sort.markdup.readgrps.split.bam -out KH4_S4.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH5_S5_L001.sort.markdup.readgrps.split.bam -in KH5_S5_L002.sort.markdup.readgrps.split.bam -in KH5_S5_L003.sort.markdup.readgrps.split.bam -in KH5_S5_L004.sort.markdup.readgrps.split.bam -out KH5_S5.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH6_S6_L001.sort.markdup.readgrps.split.bam -in KH6_S6_L002.sort.markdup.readgrps.split.bam -in KH6_S6_L003.sort.markdup.readgrps.split.bam -in KH6_S6_L004.sort.markdup.readgrps.split.bam -out KH6_S6.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH7_S7_L001.sort.markdup.readgrps.split.bam -in KH7_S7_L002.sort.markdup.readgrps.split.bam -in KH7_S7_L003.sort.markdup.readgrps.split.bam -in KH7_S7_L004.sort.markdup.readgrps.split.bam -out KH7_S7.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH8_S8_L001.sort.markdup.readgrps.split.bam -in KH8_S8_L002.sort.markdup.readgrps.split.bam -in KH8_S8_L003.sort.markdup.readgrps.split.bam -in KH8_S8_L004.sort.markdup.readgrps.split.bam -out KH8_S8.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH9_S1_L001.sort.markdup.readgrps.split.bam -in KH9_S1_L002.sort.markdup.readgrps.split.bam -in KH9_S1_L003.sort.markdup.readgrps.split.bam -in KH9_S1_L004.sort.markdup.readgrps.split.bam -out KH9_S1.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH10_S2_L001.sort.markdup.readgrps.split.bam -in KH10_S2_L004.sort.markdup.readgrps.split.bam -in KH10_S2_L002.sort.markdup.readgrps.split.bam -in KH10_S2_L003.sort.markdup.readgrps.split.bam -out KH10_S2.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH11_S3_L001.sort.markdup.readgrps.split.bam -in KH11_S3_L002.sort.markdup.readgrps.split.bam -in KH11_S3_L003.sort.markdup.readgrps.split.bam -in KH11_S3_L004.sort.markdup.readgrps.split.bam -out KH11_S3.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH12_S4_L001.sort.markdup.readgrps.split.bam -in KH12_S4_L002.sort.markdup.readgrps.split.bam -in KH12_S4_L003.sort.markdup.readgrps.split.bam -in KH12_S4_L004.sort.markdup.readgrps.split.bam -out KH12_S4.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH13_S5_L001.sort.markdup.readgrps.split.bam -in KH13_S5_L002.sort.markdup.readgrps.split.bam -in KH13_S5_L003.sort.markdup.readgrps.split.bam -in KH13_S5_L004.sort.markdup.readgrps.split.bam -out KH13_S5.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH14_S6_L001.sort.markdup.readgrps.split.bam -in KH14_S6_L002.sort.markdup.readgrps.split.bam -in KH14_S6_L003.sort.markdup.readgrps.split.bam -in KH14_S6_L004.sort.markdup.readgrps.split.bam -out KH14_S6.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH15_S7_L001.sort.markdup.readgrps.split.bam -in KH15_S7_L002.sort.markdup.readgrps.split.bam -in KH15_S7_L003.sort.markdup.readgrps.split.bam -in KH15_S7_L004.sort.markdup.readgrps.split.bam -out KH15_S7.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH16_S8_L001.sort.markdup.readgrps.split.bam -in KH16_S8_L002.sort.markdup.readgrps.split.bam -in KH16_S8_L003.sort.markdup.readgrps.split.bam -in KH16_S8_L004.sort.markdup.readgrps.split.bam -out KH16_S8.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH17_S9_L001.sort.markdup.readgrps.split.bam -in KH17_S9_L002.sort.markdup.readgrps.split.bam -in KH17_S9_L003.sort.markdup.readgrps.split.bam -in KH17_S9_L004.sort.markdup.readgrps.split.bam -out KH17_S9.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH18_S9_L001.sort.markdup.readgrps.split.bam -in KH18_S9_L002.sort.markdup.readgrps.split.bam -in KH18_S9_L003.sort.markdup.readgrps.split.bam -in KH18_S9_L004.sort.markdup.readgrps.split.bam -out KH18_S9.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH19_S10_L001.sort.markdup.readgrps.split.bam -in KH19_S10_L002.sort.markdup.readgrps.split.bam -in KH19_S10_L003.sort.markdup.readgrps.split.bam -in KH19_S10_L004.sort.markdup.readgrps.split.bam -out KH19_S10.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH20_S10_L001.sort.markdup.readgrps.split.bam -in KH20_S10_L002.sort.markdup.readgrps.split.bam -in KH20_S10_L003.sort.markdup.readgrps.split.bam -in KH20_S10_L004.sort.markdup.readgrps.split.bam -out KH20_S10.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH21_S11_L001.sort.markdup.readgrps.split.bam -in KH21_S11_L002.sort.markdup.readgrps.split.bam -in KH21_S11_L003.sort.markdup.readgrps.split.bam -in KH21_S11_L004.sort.markdup.readgrps.split.bam -out KH21_S11.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH22_S11_L001.sort.markdup.readgrps.split.bam -in KH22_S11_L002.sort.markdup.readgrps.split.bam -in KH22_S11_L003.sort.markdup.readgrps.split.bam -in KH22_S11_L004.sort.markdup.readgrps.split.bam -out KH22_S11.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH23_S12_L001.sort.markdup.readgrps.split.bam -in KH23_S12_L002.sort.markdup.readgrps.split.bam -in KH23_S12_L003.sort.markdup.readgrps.split.bam -in KH23_S12_L004.sort.markdup.readgrps.split.bam -out KH23_S12.sort.markdup.readgrps.split.merge.bam
+bamtools merge -in KH24_S12_L001.sort.markdup.readgrps.split.bam -in KH24_S12_L002.sort.markdup.readgrps.split.bam -in KH24_S12_L003.sort.markdup.readgrps.split.bam -in KH24_S12_L004.sort.markdup.readgrps.split.bam -out KH24_S12.sort.markdup.readgrps.split.merge.bam
+
+#-------------------------- 
+# 4. end timer 
+#-------------------------- 
+date
