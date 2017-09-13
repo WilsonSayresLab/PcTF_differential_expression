@@ -1,0 +1,55 @@
+#!/bin/bash
+#SBATCH -n 8
+#SBATCH --job-name=Bamtools_indexMerged
+#SBATCH -t 0-4:0
+#SBATCH -A mwilsons
+#SBATCH -o slurm.Bamtools_indexMerged.out
+#SBATCH -e slurm.Bamtools_indexMerged.err
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=kcolney@asu.edu
+#--------------------------
+
+#-------------------------- 
+# 1. start timer 
+#-------------------------- 
+date
+
+#-------------------------- 
+# 2. move to directory and load programs 
+#-------------------------- 
+
+cd /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/
+module load bamtools/2.4.0 
+
+#-------------------------- 
+# 3. BAMtools index split BAMs 
+#--------------------------
+bamtools index -in KH10_S2.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH11_S3.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH12_S4.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH13_S5.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH14_S6.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH15_S7.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH16_S8.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH17_S9.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH18_S9.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH19_S10.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH1_S1.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH20_S10.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH21_S11.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH22_S11.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH23_S12.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH24_S12.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH2_S2.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH3_S3.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH4_S4.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH5_S5.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH6_S6.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH7_S7.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH8_S8.sort.markdup.readgrps.split.merge.bam
+bamtools index -in KH9_S1.sort.markdup.readgrps.split.merge.bam
+
+#-------------------------- 
+# 4. end timer 
+#-------------------------- 
+date
