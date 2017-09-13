@@ -26,10 +26,10 @@ RNA-seq reads were quality-checked using FastQC before and after trimming and fi
 13. Index BAM files
 14. Identify genes that differentially expressed 
 #### Differential expression figures   
-1. Figure 1
-2. Figure 2
-3. Figure 3
-4. Figure 4
+1. Figure 1. Comparisons of transcription profiles of three model breast cancer lines (MCF7, BT-549, BT-474) and a control non-cancer line (MCF10A). 
+2. Figure 2. PcTF-expressing breast tissue-derived cell lines show upregulation of PRC-repressed genes and other genes. 
+3. Figure 3. QRT-PCR analysis of gene expression in stable, transgenic PcTF-expressing cells.
+4. Figure 4. Expression profiles of PcTF-responsive and nonresponsive genes in MCF7. 
 
 ### Publicly available packages:
 fastqc		http://www.bioinformatics.babraham.ac.uk/projects/fastqc/
