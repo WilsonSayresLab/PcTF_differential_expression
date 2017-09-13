@@ -26,13 +26,10 @@ RNA-seq reads were quality-checked using FastQC before and after trimming and fi
 13. Index BAM files
 14. Identify genes that differentially expressed 
 #### Differential expression figures   
-Figure 1
-
-Figure 2
-
-Figure 3
-
-Figure 4
+1. Figure 1
+2. Figure 2
+3. Figure 3
+4. Figure 4
 
 ### Publicly available packages:
 fastqc		http://www.bioinformatics.babraham.ac.uk/projects/fastqc/
