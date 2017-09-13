@@ -1,0 +1,128 @@
+#!/bin/bash
+#SBATCH -n 8
+#SBATCH --job-name=Bamtools_STATSperLane
+#SBATCH -t 0-2:0
+#SBATCH -A mwilsons
+#SBATCH -o slurm.Bamtools_STATSperLane.out
+#SBATCH -e slurm.Bamtools_STATSperLane.err
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=kcolney@asu.edu
+#--------------------------
+
+#-------------------------- 
+# 1. start timer 
+#-------------------------- 
+date
+
+#-------------------------- 
+# 2. move to directory and load programs 
+#-------------------------- 
+
+cd /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/
+module load bamtools/2.4.0 
+module load java/latest
+
+#-------------------------- 
+# 3. BAMtools index split BAMs 
+#--------------------------
+bamtools stats -in KH1_S1_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH1_S1_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH1_S1_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH1_S1_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH2_S2_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH2_S2_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH2_S2_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH2_S2_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH3_S3_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH3_S3_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH3_S3_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH3_S3_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH4_S4_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH4_S4_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH4_S4_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH4_S4_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH5_S5_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH5_S5_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH5_S5_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH5_S5_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH6_S6_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH6_S6_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH6_S6_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH6_S6_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH7_S7_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH7_S7_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH7_S7_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH7_S7_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH8_S8_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH8_S8_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH8_S8_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH8_S8_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH9_S1_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH9_S1_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH9_S1_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH9_S1_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH10_S2_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH10_S2_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH10_S2_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH10_S2_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH11_S3_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH11_S3_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH11_S3_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH11_S3_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH12_S4_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH12_S4_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH12_S4_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH12_S4_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH13_S5_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH13_S5_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH13_S5_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH13_S5_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH14_S6_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH14_S6_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH14_S6_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH14_S6_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH15_S7_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH15_S7_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH15_S7_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH15_S7_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH16_S8_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH16_S8_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH16_S8_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH16_S8_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH17_S9_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH17_S9_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH17_S9_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH17_S9_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH18_S9_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH18_S9_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH18_S9_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH18_S9_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH19_S10_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH19_S10_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH19_S10_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH19_S10_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH20_S10_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH20_S10_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH20_S10_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH20_S10_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH21_S11_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH21_S11_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH21_S11_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH21_S11_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH22_S11_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH22_S11_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH22_S11_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH22_S11_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH23_S12_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH23_S12_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH23_S12_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH23_S12_L004.sort.markdup.readgrps.bam
+bamtools stats -in KH24_S12_L001.sort.markdup.readgrps.bam
+bamtools stats -in KH24_S12_L002.sort.markdup.readgrps.bam
+bamtools stats -in KH24_S12_L003.sort.markdup.readgrps.bam
+bamtools stats -in KH24_S12_L004.sort.markdup.readgrps.bam
+
+#-------------------------- 
+# 4. end timer 
+#-------------------------- 
+date
