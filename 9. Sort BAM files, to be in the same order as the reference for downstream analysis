@@ -1,0 +1,224 @@
+#!/bin/bash
+#SBATCH -n 8
+#SBATCH --job-name=bamtools
+#SBATCH -t 2-0:0
+#SBATCH -A mwilsons
+#SBATCH -o slurm.bamtools.out
+#SBATCH -e slurm.bamtools.err
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=kcolney@asu.edu
+#--------------------------
+
+#-------------------------- 
+# 1. start timer 
+#-------------------------- 
+date
+
+#-------------------------- 
+# 2. move to directory and load programs 
+#-------------------------- 
+
+cd /home/kcolney/cancer_HaynesLab/
+module load bamtools/2.4.0 
+module load java/latest
+
+#-------------------------- 
+# 3. BAMtools sort, mark duplicates 
+#--------------------------
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH1_S1_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH1_S1_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH1_S1_L001.sorted.bam OUTPUT=KH1_S1_L001.sort.markdup.bam METRICS_FILE=KH1_S1_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH1_S1_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH1_S1_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH1_S1_L002.sorted.bam OUTPUT=KH1_S1_L002.sort.markdup.bam METRICS_FILE=KH1_S1_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH1_S1_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH1_S1_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH1_S1_L003.sorted.bam OUTPUT=KH1_S1_L003.sort.markdup.bam METRICS_FILE=KH1_S1_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH1_S1_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH1_S1_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH1_S1_L004.sorted.bam OUTPUT=KH1_S1_L004.sort.markdup.bam METRICS_FILE=KH1_S1_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH2_S2_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH2_S2_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH2_S2_L001.sorted.bam OUTPUT=KH2_S2_L001.sort.markdup.bam METRICS_FILE=KH2_S2_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH2_S2_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH2_S2_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH2_S2_L002.sorted.bam OUTPUT=KH2_S2_L002.sort.markdup.bam METRICS_FILE=KH2_S2_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH2_S2_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH2_S2_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH2_S2_L003.sorted.bam OUTPUT=KH2_S2_L003.sort.markdup.bam METRICS_FILE=KH2_S2_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH2_S2_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH2_S2_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH2_S2_L004.sorted.bam OUTPUT=KH2_S2_L004.sort.markdup.bam METRICS_FILE=KH2_S2_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH3_S3_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH3_S3_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH3_S3_L001.sorted.bam OUTPUT=KH3_S3_L001.sort.markdup.bam METRICS_FILE=KH3_S3_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH3_S3_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH3_S3_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH3_S3_L002.sorted.bam OUTPUT=KH3_S3_L002.sort.markdup.bam METRICS_FILE=KH3_S3_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH3_S3_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH3_S3_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH3_S3_L003.sorted.bam OUTPUT=KH3_S3_L003.sort.markdup.bam METRICS_FILE=KH3_S3_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH3_S3_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH3_S3_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH3_S3_L004.sorted.bam OUTPUT=KH3_S3_L004.sort.markdup.bam METRICS_FILE=KH3_S3_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH4_S4_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH4_S4_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH4_S4_L001.sorted.bam OUTPUT=KH4_S4_L001.sort.markdup.bam METRICS_FILE=KH4_S4_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH4_S4_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH4_S4_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH4_S4_L002.sorted.bam OUTPUT=KH4_S4_L002.sort.markdup.bam METRICS_FILE=KH4_S4_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH4_S4_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH4_S4_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH4_S4_L003.sorted.bam OUTPUT=KH4_S4_L003.sort.markdup.bam METRICS_FILE=KH4_S4_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH4_S4_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH4_S4_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH4_S4_L004.sorted.bam OUTPUT=KH4_S4_L004.sort.markdup.bam METRICS_FILE=KH4_S4_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH5_S5_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH5_S5_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH5_S5_L001.sorted.bam OUTPUT=KH5_S5_L001.sort.markdup.bam METRICS_FILE=KH5_S5_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH5_S5_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH5_S5_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH5_S5_L002.sorted.bam OUTPUT=KH5_S5_L002.sort.markdup.bam METRICS_FILE=KH5_S5_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH5_S5_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH5_S5_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH5_S5_L003.sorted.bam OUTPUT=KH5_S5_L003.sort.markdup.bam METRICS_FILE=KH5_S5_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH5_S5_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH5_S5_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH5_S5_L004.sorted.bam OUTPUT=KH5_S5_L004.sort.markdup.bam METRICS_FILE=KH5_S5_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH6_S6_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH6_S6_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH6_S6_L001.sorted.bam OUTPUT=KH6_S6_L001.sort.markdup.bam METRICS_FILE=KH6_S6_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH6_S6_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH6_S6_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH6_S6_L002.sorted.bam OUTPUT=KH6_S6_L002.sort.markdup.bam METRICS_FILE=KH6_S6_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH6_S6_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH6_S6_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH6_S6_L003.sorted.bam OUTPUT=KH6_S6_L003.sort.markdup.bam METRICS_FILE=KH6_S6_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH6_S6_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH6_S6_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH6_S6_L004.sorted.bam OUTPUT=KH6_S6_L004.sort.markdup.bam METRICS_FILE=KH6_S6_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH7_S7_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH7_S7_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH7_S7_L001.sorted.bam OUTPUT=KH7_S7_L001.sort.markdup.bam METRICS_FILE=KH7_S7_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH7_S7_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH7_S7_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH7_S7_L002.sorted.bam OUTPUT=KH7_S7_L002.sort.markdup.bam METRICS_FILE=KH7_S7_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH7_S7_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH7_S7_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH7_S7_L003.sorted.bam OUTPUT=KH7_S7_L003.sort.markdup.bam METRICS_FILE=KH7_S7_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH7_S7_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH7_S7_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH7_S7_L004.sorted.bam OUTPUT=KH7_S7_L004.sort.markdup.bam METRICS_FILE=KH7_S7_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH8_S8_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH8_S8_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH8_S8_L001.sorted.bam OUTPUT=KH8_S8_L001.sort.markdup.bam METRICS_FILE=KH8_S8_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH8_S8_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH8_S8_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH8_S8_L002.sorted.bam OUTPUT=KH8_S8_L002.sort.markdup.bam METRICS_FILE=KH8_S8_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH8_S8_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH8_S8_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH8_S8_L003.sorted.bam OUTPUT=KH8_S8_L003.sort.markdup.bam METRICS_FILE=KH8_S8_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH8_S8_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH8_S8_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH8_S8_L004.sorted.bam OUTPUT=KH8_S8_L004.sort.markdup.bam METRICS_FILE=KH8_S8_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH9_S1_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH9_S1_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH9_S1_L001.sorted.bam OUTPUT=KH9_S1_L001.sort.markdup.bam METRICS_FILE=KH9_S1_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH9_S1_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH9_S1_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH9_S1_L002.sorted.bam OUTPUT=KH9_S1_L002.sort.markdup.bam METRICS_FILE=KH9_S1_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH9_S1_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH9_S1_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH9_S1_L003.sorted.bam OUTPUT=KH9_S1_L003.sort.markdup.bam METRICS_FILE=KH9_S1_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH9_S1_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH9_S1_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH9_S1_L004.sorted.bam OUTPUT=KH9_S1_L004.sort.markdup.bam METRICS_FILE=KH9_S1_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH10_S2_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH10_S2_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH10_S2_L001.sorted.bam OUTPUT=KH10_S2_L001.sort.markdup.bam METRICS_FILE=KH10_S2_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH10_S2_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH10_S2_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH10_S2_L004.sorted.bam OUTPUT=KH10_S2_L004.sort.markdup.bam METRICS_FILE=KH10_S2_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH10_S2_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH10_S2_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH10_S2_L002.sorted.bam OUTPUT=KH10_S2_L002.sort.markdup.bam METRICS_FILE=KH10_S2_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH10_S2_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH10_S2_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH10_S2_L003.sorted.bam OUTPUT=KH10_S2_L003.sort.markdup.bam METRICS_FILE=KH10_S2_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH11_S3_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH11_S3_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH11_S3_L001.sorted.bam OUTPUT=KH11_S3_L001.sort.markdup.bam METRICS_FILE=KH11_S3_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH11_S3_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH11_S3_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH11_S3_L002.sorted.bam OUTPUT=KH11_S3_L002.sort.markdup.bam METRICS_FILE=KH11_S3_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH11_S3_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH11_S3_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH11_S3_L003.sorted.bam OUTPUT=KH11_S3_L003.sort.markdup.bam METRICS_FILE=KH11_S3_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH11_S3_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH11_S3_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH11_S3_L004.sorted.bam OUTPUT=KH11_S3_L004.sort.markdup.bam METRICS_FILE=KH11_S3_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH12_S4_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH12_S4_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH12_S4_L001.sorted.bam OUTPUT=KH12_S4_L001.sort.markdup.bam METRICS_FILE=KH12_S4_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH12_S4_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH12_S4_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH12_S4_L002.sorted.bam OUTPUT=KH12_S4_L002.sort.markdup.bam METRICS_FILE=KH12_S4_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH12_S4_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH12_S4_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH12_S4_L003.sorted.bam OUTPUT=KH12_S4_L003.sort.markdup.bam METRICS_FILE=KH12_S4_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH12_S4_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH12_S4_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH12_S4_L004.sorted.bam OUTPUT=KH12_S4_L004.sort.markdup.bam METRICS_FILE=KH12_S4_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH13_S5_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH13_S5_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH13_S5_L001.sorted.bam OUTPUT=KH13_S5_L001.sort.markdup.bam METRICS_FILE=KH13_S5_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH13_S5_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH13_S5_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH13_S5_L002.sorted.bam OUTPUT=KH13_S5_L002.sort.markdup.bam METRICS_FILE=KH13_S5_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH13_S5_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH13_S5_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH13_S5_L003.sorted.bam OUTPUT=KH13_S5_L003.sort.markdup.bam METRICS_FILE=KH13_S5_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH13_S5_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH13_S5_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH13_S5_L004.sorted.bam OUTPUT=KH13_S5_L004.sort.markdup.bam METRICS_FILE=KH13_S5_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH14_S6_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH14_S6_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH14_S6_L001.sorted.bam OUTPUT=KH14_S6_L001.sort.markdup.bam METRICS_FILE=KH14_S6_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH14_S6_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH14_S6_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH14_S6_L002.sorted.bam OUTPUT=KH14_S6_L002.sort.markdup.bam METRICS_FILE=KH14_S6_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH14_S6_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH14_S6_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH14_S6_L003.sorted.bam OUTPUT=KH14_S6_L003.sort.markdup.bam METRICS_FILE=KH14_S6_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH14_S6_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH14_S6_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH14_S6_L004.sorted.bam OUTPUT=KH14_S6_L004.sort.markdup.bam METRICS_FILE=KH14_S6_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH15_S7_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH15_S7_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH15_S7_L001.sorted.bam OUTPUT=KH15_S7_L001.sort.markdup.bam METRICS_FILE=KH15_S7_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH15_S7_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH15_S7_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH15_S7_L002.sorted.bam OUTPUT=KH15_S7_L002.sort.markdup.bam METRICS_FILE=KH15_S7_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH15_S7_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH15_S7_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH15_S7_L003.sorted.bam OUTPUT=KH15_S7_L003.sort.markdup.bam METRICS_FILE=KH15_S7_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH15_S7_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH15_S7_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH15_S7_L004.sorted.bam OUTPUT=KH15_S7_L004.sort.markdup.bam METRICS_FILE=KH15_S7_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH16_S8_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH16_S8_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH16_S8_L001.sorted.bam OUTPUT=KH16_S8_L001.sort.markdup.bam METRICS_FILE=KH16_S8_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH16_S8_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH16_S8_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH16_S8_L002.sorted.bam OUTPUT=KH16_S8_L002.sort.markdup.bam METRICS_FILE=KH16_S8_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH16_S8_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH16_S8_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH16_S8_L003.sorted.bam OUTPUT=KH16_S8_L003.sort.markdup.bam METRICS_FILE=KH16_S8_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH16_S8_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH16_S8_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH16_S8_L004.sorted.bam OUTPUT=KH16_S8_L004.sort.markdup.bam METRICS_FILE=KH16_S8_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH17_S9_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH17_S9_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH17_S9_L001.sorted.bam OUTPUT=KH17_S9_L001.sort.markdup.bam METRICS_FILE=KH17_S9_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH17_S9_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH17_S9_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH17_S9_L002.sorted.bam OUTPUT=KH17_S9_L002.sort.markdup.bam METRICS_FILE=KH17_S9_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH17_S9_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH17_S9_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH17_S9_L003.sorted.bam OUTPUT=KH17_S9_L003.sort.markdup.bam METRICS_FILE=KH17_S9_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH17_S9_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH17_S9_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH17_S9_L004.sorted.bam OUTPUT=KH17_S9_L004.sort.markdup.bam METRICS_FILE=KH17_S9_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH18_S9_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH18_S9_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH18_S9_L001.sorted.bam OUTPUT=KH18_S9_L001.sort.markdup.bam METRICS_FILE=KH18_S9_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH18_S9_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH18_S9_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH18_S9_L002.sorted.bam OUTPUT=KH18_S9_L002.sort.markdup.bam METRICS_FILE=KH18_S9_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH18_S9_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH18_S9_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH18_S9_L003.sorted.bam OUTPUT=KH18_S9_L003.sort.markdup.bam METRICS_FILE=KH18_S9_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH18_S9_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH18_S9_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH18_S9_L004.sorted.bam OUTPUT=KH18_S9_L004.sort.markdup.bam METRICS_FILE=KH18_S9_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH19_S10_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH19_S10_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH19_S10_L001.sorted.bam OUTPUT=KH19_S10_L001.sort.markdup.bam METRICS_FILE=KH19_S10_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH19_S10_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH19_S10_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH19_S10_L002.sorted.bam OUTPUT=KH19_S10_L002.sort.markdup.bam METRICS_FILE=KH19_S10_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH19_S10_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH19_S10_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH19_S10_L003.sorted.bam OUTPUT=KH19_S10_L003.sort.markdup.bam METRICS_FILE=KH19_S10_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH19_S10_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH19_S10_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH19_S10_L004.sorted.bam OUTPUT=KH19_S10_L004.sort.markdup.bam METRICS_FILE=KH19_S10_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH20_S10_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH20_S10_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH20_S10_L001.sorted.bam OUTPUT=KH20_S10_L001.sort.markdup.bam METRICS_FILE=KH20_S10_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH20_S10_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH20_S10_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH20_S10_L002.sorted.bam OUTPUT=KH20_S10_L002.sort.markdup.bam METRICS_FILE=KH20_S10_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH20_S10_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH20_S10_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH20_S10_L003.sorted.bam OUTPUT=KH20_S10_L003.sort.markdup.bam METRICS_FILE=KH20_S10_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH20_S10_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH20_S10_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH20_S10_L004.sorted.bam OUTPUT=KH20_S10_L004.sort.markdup.bam METRICS_FILE=KH20_S10_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH21_S11_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH21_S11_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH21_S11_L001.sorted.bam OUTPUT=KH21_S11_L001.sort.markdup.bam METRICS_FILE=KH21_S11_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH21_S11_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH21_S11_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH21_S11_L002.sorted.bam OUTPUT=KH21_S11_L002.sort.markdup.bam METRICS_FILE=KH21_S11_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH21_S11_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH21_S11_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH21_S11_L003.sorted.bam OUTPUT=KH21_S11_L003.sort.markdup.bam METRICS_FILE=KH21_S11_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH21_S11_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH21_S11_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH21_S11_L004.sorted.bam OUTPUT=KH21_S11_L004.sort.markdup.bam METRICS_FILE=KH21_S11_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH22_S11_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH22_S11_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH22_S11_L001.sorted.bam OUTPUT=KH22_S11_L001.sort.markdup.bam METRICS_FILE=KH22_S11_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH22_S11_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH22_S11_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH22_S11_L002.sorted.bam OUTPUT=KH22_S11_L002.sort.markdup.bam METRICS_FILE=KH22_S11_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH22_S11_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH22_S11_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH22_S11_L003.sorted.bam OUTPUT=KH22_S11_L003.sort.markdup.bam METRICS_FILE=KH22_S11_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH22_S11_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH22_S11_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH22_S11_L004.sorted.bam OUTPUT=KH22_S11_L004.sort.markdup.bam METRICS_FILE=KH22_S11_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH23_S12_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH23_S12_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH23_S12_L001.sorted.bam OUTPUT=KH23_S12_L001.sort.markdup.bam METRICS_FILE=KH23_S12_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH23_S12_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH23_S12_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH23_S12_L002.sorted.bam OUTPUT=KH23_S12_L002.sort.markdup.bam METRICS_FILE=KH23_S12_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH23_S12_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH23_S12_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH23_S12_L003.sorted.bam OUTPUT=KH23_S12_L003.sort.markdup.bam METRICS_FILE=KH23_S12_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH23_S12_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH23_S12_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH23_S12_L004.sorted.bam OUTPUT=KH23_S12_L004.sort.markdup.bam METRICS_FILE=KH23_S12_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH24_S12_L001_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH24_S12_L001.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH24_S12_L001.sorted.bam OUTPUT=KH24_S12_L001.sort.markdup.bam METRICS_FILE=KH24_S12_L001sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH24_S12_L002_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH24_S12_L002.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH24_S12_L002.sorted.bam OUTPUT=KH24_S12_L002.sort.markdup.bam METRICS_FILE=KH24_S12_L002sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH24_S12_L003_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH24_S12_L003.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH24_S12_L003.sorted.bam OUTPUT=KH24_S12_L003.sort.markdup.bam METRICS_FILE=KH24_S12_L003sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+bamtools sort -in /scratch/kcolney/cancerCellLines_Haynes/2_data/STAR_pass1/KH24_S12_L004_pass1.Aligned.out.bam -out /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/KH24_S12_L004.sort.bam
+java -Xmx8g -jar /home/kcolney/ngcchome/tools2/picard.jar MarkDuplicates INPUT=KH24_S12_L004.sorted.bam OUTPUT=KH24_S12_L004.sort.markdup.bam METRICS_FILE=KH24_S12_L004sort.markdup.picardMetrics.txt REMOVE_DUPLICATES=false ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT
+
+#-------------------------- 
+# 4. end timer 
+#-------------------------- 
+date
