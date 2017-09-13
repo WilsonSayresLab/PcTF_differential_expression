@@ -1,0 +1,51 @@
+#!/bin/bash
+
+#SBATCH -n 12                   # use all 32 cores on the SMP node
+#SBATCH -p private
+#SBATCH --job-name=fastQC_catTrim_KH11_KH15
+#SBATCH -t 0-2:0                # time 
+#SBATCH -A mwilsons
+#SBATCH -o slurm.fastQC_catTrim_KH11_KH15.out
+#SBATCH -e slurm.fastQC_catTrim_KH11_KH15.err  
+#SBATCH --mail-type=END,FAIL 
+##SBATCH --mail-user=kcolney@asu.edu # If you want it to email you when the job is completed or fails
+################################
+# Trimmming 
+
+#--------------------------
+# 1. start timer
+#--------------------------
+
+date
+
+#--------------------------
+# 2. move to the appropriate directory 
+#--------------------------
+
+cd /home/kcolney/cancer_HaynesLab/catlane_fastq
+
+#--------------------------
+# 3. load module 
+#--------------------------
+
+module load fastqc/0.11.3 
+
+#--------------------------
+# 4. fastqc
+#--------------------------
+
+#parallel -j10 fastqc *{1}Trim*.fastq::: KH11_ KH12_ KH13_ KH14_ KH15_ 
+
+fastqc KH11_Trim_430minlen50.fastq
+fastqc KH12_Trim_430minlen50.fastq
+fastqc KH13_Trim_430minlen50.fastq
+fastqc KH14_Trim_430minlen50.fastq
+fastqc KH15_Trim_430minlen50.fastq
+
+
+ 
+#--------------------------
+# 5. end timer
+#--------------------------
+
+date
