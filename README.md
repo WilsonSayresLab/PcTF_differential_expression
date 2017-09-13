@@ -41,11 +41,11 @@ RNA-seq reads were quality-checked using FastQC before and after trimming and fi
 --------------------------------------
 RNAseq processing for differential expression analysis 
 --------------------------------------
-### 1. Download data
+#### 1. Download data
 GEO accession number
 Fastq and CuffDiff output files are available at the National Center for Biotechnology Information (NCBI) Gene Expression Omnibus (GEO) database (accession GSE103520)
 
-### 2. Create and view fastqc reports
+#### 2. Create and view fastqc reports
  Fastqc reads raw sequence data from high throughput sequencers and runs a set of quality checks to produce a report. 
  Best reports are those whose "per base sequence quality" are included in the green area of the graph & kmer content is good or average.
 
@@ -54,39 +54,19 @@ Fastq and CuffDiff output files are available at the National Center for Biotech
  Reports were saved in fastq_files directory in Project /Project/fastq_files
  This command will create two outputs: an .html file & an .zip file. Will output sampleID_fastqc.html and sampleID_fastqc.zip files
 
-### 3. Trim raw fastq files for quality and to remove adaptors 
+#### 3. Trim raw fastq files for quality and to remove adaptors 
 The selection of trimming steps and their associated parameters are supplied on the command line.
 The parameters selected were slidingwindow:4:30 leading10 trailing25 minlen50 phred33. They were chosen based on a better per sequence quality base and kmer content.
 		
 	Example command: $java -jar trimmomatic-0.36.jar SE -phred33 input.fq.gz output.fq.gz ILLUMINACLIP:/adapters/TruSeq3-SE.fa:2:30:10 LEADING:10 TRAILING:25 SLIDINGWINDOW:4:30 MINLEN:50
 
---------------------------------------
- 5. Create and view fastqc reports for the trimmed fastq files
---------------------------------------
- Fastqc reads sequence data from high throughput sequencers and runs a set of quality checks to produce a report. 
- Best reports are those whose "per base sequence quality" are included in the green area of the graph & kmer content is good or average.
 
- Example command: $fastqc sampleID_minlen50_sliding430_leading30_trailing40.fastq
- fastqc                                                        Babraham bioinformatics program that that checks for quality of reads 
- sampleID.fastq                                                path and name of sampleID in fastq format, may also be in fastq.gz format
+#### 4. Create and view fastqc reports for the trimmed fastq files
 
- Reports were saved in fastq_files directory in Project /Project/fastq_files
- This command will create two outputs: an .html file & an .zip file. Will output sampleID_fastqc.html and sampleID_fastqc.zip files
+	Example command: $fastqc sampleID_minlen50_sliding430_leading30_trailing40.fastq
 
- SBATCH script -
-sbatch NameOfSBATCHscript.sh 
 
- Move fastqc reports to desktop to visualize them as you can't open html in a terminal.
- Open new terminal as this will not work if logged into a HPC (high performance computing) cluster
- Example command: $scp user@saguaro.a2c2.asu.edu:/Project/fastq_files/sampleID_raw_fastqc.html /Users/Desktop/
- scp                                                           secure copy  (linux command)                   
- /path/to/fastqc.html                                          path to where the files are located
- /path/where/you/want/fastqc.html                              path to where you would like to copy the files to 
-
- Reports were saved in Desktop in folder /trimmed_FASTQC
---------------------------------------
- 6. Obtain reference genome and gene annotation file 
---------------------------------------
+#### 5. Obtain reference genome and gene annotation file 
  Obtain reference genome and gene annotation file to be used for mapping reads. 
  Use the most relavent current version GRCh38.p7 from gencode. http://www.gencodegenes.org/releases/current.html
  Genome sequence (GRCh38.p7)	ALL	GRCh38.p7.genome.fa.gz
@@ -108,9 +88,9 @@ sbatch NameOfSBATCHscript.sh
  SBATCH script -
 sbatch NameOfSBATCHscript.sh 
 
---------------------------------------
- 7. Generate reference genome index and dictionary 
---------------------------------------
+
+#### 6. Generate reference genome index and dictionary 
+
  A .dict dictionary of the contig names and sizes and a .fai fasta index file allow efficient random access to the reference bases for downstream analysis and mapping 
  You have to generate these files in order to be able to use a Fasta file as reference.
  In this step user supplied the reference genome sequences (FASTA files) and annotations(GTF file), from which STAR generate genome indexes that are utilized in the 2nd step. 
@@ -146,9 +126,9 @@ sbatch NameOfSBATCHscript.sh
  SBATCH script -
 sbatch NameOfSBATCHscript.sh 
 
---------------------------------------
- 8. STAR: map transcript reads to the reference genome, output as a .bam
---------------------------------------
+
+#### 7. STAR: map transcript reads to the reference genome, output as a .bam
+
  STAR read aligner is a 2 pass process. 
  The user supplies the genome files generated in the pervious step (generate genome indexes), as well as the RNA-seq reads (sequences) in the form of FASTA or FASTQ files. 
  STAR maps the reads to the genome, and writes several output files, such as alignments (SAM/BAM), mapping summary statistics, splice junctions, unmapped reads, signal (wiggle) tracks etc. 
@@ -225,9 +205,9 @@ sbatch NameOfSBATCHscript.sh
  SBATCH script - 
 sbatch NameOfSBATCHscript.sh 
 
---------------------------------------
- 9. Check initial quality stats on .bam files 
---------------------------------------
+
+ #### 8. Check initial quality stats on .bam files 
+
  Will print basic statistics from input BAM file(s)
  Total reads:       
  Mapped reads:      
