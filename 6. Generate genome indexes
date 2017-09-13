@@ -1,0 +1,57 @@
+#!/bin/bash
+
+#SBATCH -n 8                  # use all 32 cores on the SMP node
+##SBATCH -p private
+##SBATCH --mem-per-cpu=16000
+#SBATCH --job-name=GRCh38Reference_Y_excluded_VP64
+#SBATCH -t 0-4:0                # time
+#SBATCH -A mwilsons
+#SBATCH -o slurm.GRCh38Reference_Y_excluded_VP64.out
+#SBATCH -e slurm.GRCh38Reference_Y_excluded_VP64.err
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=kcolney@asu.edu # If you want it to email you when the job is completed or fails
+################################
+
+#--------------------------
+# 1. start timer
+#--------------------------
+
+date
+
+#--------------------------
+# 2. move to the appropriate directory
+#--------------------------
+
+cd /home/kcolney/cancer_HaynesLab/GRCh38_Y_excluded_VP64
+
+#--------------------------
+# 3. load module
+#--------------------------
+
+module load star/2.4.2a
+module load java/latest
+module load samtools/1.3.1
+
+#--------------------------
+# 4. Reference genome for STAR format
+#--------------------------
+
+STAR --genomeDir /home/kcolney/cancer_HaynesLab/GRCh38_Y_excluded_VP64 --runMode genomeGenerate --genomeFastaFiles /home/kcolney/cancer_HaynesLab/GRCh38_Y_excluded_VP64/GRCh38.p7_Y_excluded_VP64.fa --sjdbGTFfile gencode.v25.chr_patch_hapl_scaff.annotation.gtf --runThreadN 12
+
+#--------------------------
+# 5. create reference dictionary
+#--------------------------
+
+java -Xmx14g -jar /home/kcolney/ngcchome/tools2/picard.jar CreateSequenceDictionary R=GRCh38.p7_Y_excluded_VP64.fa O=GRCh38.p7_Y_excluded_VP64.fa.dict
+
+#--------------------------
+# 6. create .fai reference
+#--------------------------
+
+samtools faidx GRCh38.p7_Y_excluded_VP64.fa
+
+#--------------------------
+# 7. end timer
+#--------------------------
+
+date
