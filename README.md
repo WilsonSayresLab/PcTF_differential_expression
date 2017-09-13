@@ -18,13 +18,15 @@ RNA-seq reads were quality-checked using FastQC before and after trimming and fi
 5. Obtain reference genome and gene annotation files
 6. Generate genome indexes
 7. STAR: map transcript reads to the reference genome and identify splice junctions 
-8. check quality of raw BAM files
+8. Check quality of raw BAM files
 9. Sort BAM files, to be in the same order as the reference for downstream analysis 
 10. Mark duplicates, duplicates will not be removed but will be marked for quality checks
 11. Add read groups to BAM files, this done to keep the sample ids organized when creating the merged vcf file
-12. check quality of add read group BAM files
-13. Index BAM files
-14. Identify genes that differentially expressed 
+12. Check quality of add read group BAM files
+13. Merge lanes into one BAM file 
+14. Index BAM files
+15. Check quality of merged BAM file 
+16. Identify genes that differentially expressed 
 #### Differential expression figures   
 1. Figure 1. Comparisons of transcription profiles of three model breast cancer lines (MCF7, BT-549, BT-474) and a control non-cancer line (MCF10A). 
 2. Figure 2. PcTF-expressing breast tissue-derived cell lines show upregulation of PRC-repressed genes and other genes. 
@@ -134,14 +136,18 @@ Compare stat results for each sample to the markdup.bam file (sanity check: is t
  
  	Example command: bamtools stats -in sampleID.sorted.markdup.addReadGr.bam
 
-#### 13. Index BAM files 
+#### 13. Merge lanes into one BAM file
+
+#### 14. Index BAM files
 For each sample index the processed BAM files that are sorted, have marked duplicates, and have read groups added. These will be used to identify callable loci. 
 Indexing is used to "sort" by chromosome and region 
 Output will be sampleID.sorted.markdup.addReadGr.bam.bai
  
  	Example command: $bamtools index -in sampleID.sorted.markdup.addReadGr.bam
 
-#### 14. Differential expression using Cuffdiff
+#### 15. Check quality of merged BAM files 
+
+#### 16. Differential expression using Cuffdiff
 Identify differentially expressed genes and transcripts using cuffdiff. Cuffdiff is used to find significant changes in transcript expression, splicing, and promoter use. Cuffdiff uses a gene annotation file downloaded with a sbatch script from Gencode GRCh38
  
 	Example command: $cuffdiff -use-sample-sheet -o diff_out -b reference.fa -p 8 --library-type fr-firststrand -L set1,set2 -u refence.gtf sampleSet.txt
