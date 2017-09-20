@@ -1,0 +1,59 @@
+#!/bin/bash
+
+#SBATCH -n 8                   # use all 32 cores on the SMP node
+##SBATCH -p private
+#SBATCH --job-name=Trim_FASTQC_eachlane
+#SBATCH -t 0-8:0                # time 
+#SBATCH -A mwilsons
+#SBATCH -o slurm.Trim_FASTQC_eachlane.out
+#SBATCH -e slurm.Trim_FASTQC_eachlane.err  
+#SBATCH --mail-type=END,FAIL 
+#SBATCH --mail-user=kcolney@asu.edu # If you want it to email you when the job is completed or fails
+################################
+# Trimmming 
+
+#--------------------------
+# 1. start timer
+#--------------------------
+
+date
+
+#--------------------------
+# 2. move to the appropriate directory 
+#--------------------------
+
+cd /home/kcolney/cancer_HaynesLab/raw_fastq
+
+#--------------------------
+# 3. load module 
+#--------------------------
+
+module load fastqc/0.11.3
+module load java/latest
+
+#--------------------------
+# 4. trim the fastq files for each of the 4 lanes for each sample 
+#--------------------------
+# trim the fastq files 
+parallel -j20 java -jar /home/kcolney/ngcchome/tools2/Trimmomatic-0.36/trimmomatic-0.36.jar SE -phred33 {1}_L001_R1_001.fastq /home/kcolney/cancer_HaynesLab/trim_eachlane/{1}_L001_Trim_430minlen50.fastq ILLUMINACLIP:/home/kcolney/ngcchome/tools2/Trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:10 TRAILING:25 SLIDINGWINDOW:4:30 MINLEN:50 ::: KH1_S1 KH2_S2 KH3_S3 KH4_S4 KH5_S5 KH6_S6 KH7_S7 KH8_S8 KH9_S1 KH10_S2 KH11_S3 KH12_S4
+parallel -j20 java -jar /home/kcolney/ngcchome/tools2/Trimmomatic-0.36/trimmomatic-0.36.jar SE -phred33 {1}_L002_R1_001.fastq /home/kcolney/cancer_HaynesLab/trim_eachlane/{1}_L002_Trim_430minlen50.fastq ILLUMINACLIP:/home/kcolney/ngcchome/tools2/Trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:10 TRAILING:25 SLIDINGWINDOW:4:30 MINLEN:50 ::: KH1_S1 KH2_S2 KH3_S3 KH4_S4 KH5_S5 KH6_S6 KH7_S7 KH8_S8 KH9_S1 KH10_S2 KH11_S3 KH12_S4
+parallel -j20 java -jar /home/kcolney/ngcchome/tools2/Trimmomatic-0.36/trimmomatic-0.36.jar SE -phred33 {1}_L003_R1_001.fastq /home/kcolney/cancer_HaynesLab/trim_eachlane/{1}_L003_Trim_430minlen50.fastq ILLUMINACLIP:/home/kcolney/ngcchome/tools2/Trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:10 TRAILING:25 SLIDINGWINDOW:4:30 MINLEN:50 ::: KH1_S1 KH2_S2 KH3_S3 KH4_S4 KH5_S5 KH6_S6 KH7_S7 KH8_S8 KH9_S1 KH10_S2 KH11_S3 KH12_S4
+parallel -j20 java -jar /home/kcolney/ngcchome/tools2/Trimmomatic-0.36/trimmomatic-0.36.jar SE -phred33 {1}_L004_R1_001.fastq /home/kcolney/cancer_HaynesLab/trim_eachlane/{1}_L004_Trim_430minlen50.fastq ILLUMINACLIP:/home/kcolney/ngcchome/tools2/Trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:10 TRAILING:25 SLIDINGWINDOW:4:30 MINLEN:50 ::: KH1_S1 KH2_S2 KH3_S3 KH4_S4 KH5_S5 KH6_S6 KH7_S7 KH8_S8 KH9_S1 KH10_S2 KH11_S3 KH12_S4
+
+parallel -j20 java -jar /home/kcolney/ngcchome/tools2/Trimmomatic-0.36/trimmomatic-0.36.jar SE -phred33 {1}_L001_R1_001.fastq /home/kcolney/cancer_HaynesLab/trim_eachlane/{1}_L001_Trim_430minlen50.fastq ILLUMINACLIP:/home/kcolney/ngcchome/tools2/Trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:10 TRAILING:25 SLIDINGWINDOW:4:30 MINLEN:50 ::: KH13_S5 KH14_S6 KH15_S7 KH16_S8 KH17_S9 KH18_S9 KH19_S10 KH20_S10 KH21_S11 KH22_S11 KH23_S12 KH24_S12
+parallel -j20 java -jar /home/kcolney/ngcchome/tools2/Trimmomatic-0.36/trimmomatic-0.36.jar SE -phred33 {1}_L002_R1_001.fastq /home/kcolney/cancer_HaynesLab/trim_eachlane/{1}_L002_Trim_430minlen50.fastq ILLUMINACLIP:/home/kcolney/ngcchome/tools2/Trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:10 TRAILING:25 SLIDINGWINDOW:4:30 MINLEN:50 ::: KH13_S5 KH14_S6 KH15_S7 KH16_S8 KH17_S9 KH18_S9 KH19_S10 KH20_S10 KH21_S11 KH22_S11 KH23_S12 KH24_S12
+parallel -j20 java -jar /home/kcolney/ngcchome/tools2/Trimmomatic-0.36/trimmomatic-0.36.jar SE -phred33 {1}_L003_R1_001.fastq /home/kcolney/cancer_HaynesLab/trim_eachlane/{1}_L003_Trim_430minlen50.fastq ILLUMINACLIP:/home/kcolney/ngcchome/tools2/Trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:10 TRAILING:25 SLIDINGWINDOW:4:30 MINLEN:50 ::: KH13_S5 KH14_S6 KH15_S7 KH16_S8 KH17_S9 KH18_S9 KH19_S10 KH20_S10 KH21_S11 KH22_S11 KH23_S12 KH24_S12
+parallel -j20 java -jar /home/kcolney/ngcchome/tools2/Trimmomatic-0.36/trimmomatic-0.36.jar SE -phred33 {1}_L004_R1_001.fastq /home/kcolney/cancer_HaynesLab/trim_eachlane/{1}_L004_Trim_430minlen50.fastq ILLUMINACLIP:/home/kcolney/ngcchome/tools2/Trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:10 TRAILING:25 SLIDINGWINDOW:4:30 MINLEN:50 ::: KH13_S5 KH14_S6 KH15_S7 KH16_S8 KH17_S9 KH18_S9 KH19_S10 KH20_S10 KH21_S11 KH22_S11 KH23_S12 KH24_S12
+
+#--------------------------
+# 5. end timer
+#--------------------------
+
+date
+
+
+
+
+
+
+
