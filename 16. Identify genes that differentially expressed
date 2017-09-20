@@ -1,0 +1,35 @@
+#!/bin/bash
+
+#SBATCH -n 24 
+#SBATCH --mem-per-cpu=18000
+#SBATCH --job-name=T_controls_cuffdiff_MCF10A
+#SBATCH -t 6-0:0
+##SBATCH -A mwilsons
+#SBATCH -o slurm.T_controls_cuffdiff_MCF10A.out
+#SBATCH -e slurm.T_controls_cuffdiff_MCF10A.err
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=kcolney@asu.edu
+#--------------------------
+
+#-------------------------- 
+# 1. start timer 
+#-------------------------- 
+date
+
+#-------------------------- 
+# 2. move to directory and load programs 
+#-------------------------- 
+
+cd /scratch/kcolney/cancerCellLines_Haynes/2_data/BAM/
+module load cufflinks/2.2.1
+
+#-------------------------- 
+# 3. Cuffdiff - pairwise comparison 
+#--------------------------
+
+cuffdiff -o /scratch/kcolney/cancerCellLines_Haynes/2_data/cuffdiff/diff_out_ALL_dup -b /scratch/kcolney/cancerCellLines_Haynes/GRCh38_Y_excluded_VP64/GRCh38.p7_Y_excluded_VP64_chr.fa -p 8 -L BT474_C,BT549_C,MCF7_C,MCF10A_C,BT474_24,BT474_48,BT474_72,BT549_24,BT549_48,BT549_72,MCF7_24,MCF7_48,MCF7_72 -u /scratch/kcolney/cancerCellLines_Haynes/GRCh38_Y_excluded_VP64/gencode.v25.chr_patch_hapl_scaff.annotation_PcTF.gtf KH1_S1.sort.markdup.readgrps.merge.bam,KH2_S2.sort.markdup.readgrps.merge.bam, KH9_S1.sort.markdup.readgrps.merge.bam,KH10_S2.sort.markdup.readgrps.merge.bam, KH17_S9.sort.markdup.readgrps.merge.bam,KH18_S9.sort.markdup.readgrps.merge.bam, DN1_S1.sort.markdup.readgrps.merge.bam,DN2_S2.sort.markdup.readgrps.merge.bam,DN5_S3.sort.markdup.readgrps.merge.bam, KH3_S3.sort.markdup.readgrps.merge.bam,KH4_S4.sort.markdup.readgrps.merge.bam, KH5_S5.sort.markdup.readgrps.merge.bam,KH6_S6.sort.markdup.readgrps.merge.bam, KH7_S7.sort.markdup.readgrps.merge.bam,KH8_S8.sort.markdup.readgrps.merge.bam, KH11_S3.sort.markdup.readgrps.merge.bam,KH12_S4.sort.markdup.readgrps.merge.bam, KH13_S5.sort.markdup.readgrps.merge.bam,KH14_S6.sort.markdup.readgrps.merge.bam, KH15_S7.sort.markdup.readgrps.merge.bam,KH16_S8.sort.markdup.readgrps.merge.bam, KH19_S10.sort.markdup.readgrps.merge.bam,KH20_S10.sort.markdup.readgrps.merge.bam, KH21_S11.sort.markdup.readgrps.merge.bam,KH22_S11.sort.markdup.readgrps.merge.bam, KH23_S12.sort.markdup.readgrps.merge.bam,KH24_S12.sort.markdup.readgrps.merge.bam
+
+#-------------------------- 
+# 4. end timer 
+#-------------------------- 
+date
